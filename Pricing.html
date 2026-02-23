@@ -1,0 +1,1748 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Camira — Pricing</title>
+
+  <!-- reuse your site CSS -->
+  <link rel="stylesheet" href="css/site_global.css?crc=4185260426" />
+  <link rel="stylesheet" href="css/index.css?crc=3951584500" id="pagesheet" />
+  <link rel="icon" type="png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="png" sizes="16x16" href="favicon-16x16.png">
+
+  <!-- reuse your webfont if needed -->
+  <script type="text/javascript">var __adobewebfontsappname__="muse";</script>
+  <script src="https://webfonts.creativecloud.com/krona-one:n4:all;coda:n4:all.js" defer></script>
+
+  <style>
+    /* Page-specific styles (non-destructive to your Muse CSS) */
+    body { background: #2E3151; }
+    main { max-width: 1020px; margin: 28px auto; padding: 0 20px 80px; }
+
+    .hero { text-align:center; color: #fff; padding: 80px 12px 28px; }
+    .hero h1 { font-family: coda, sans-serif; margin: 0 0 6px; font-size: 36px; }
+    .hero p { margin: 0 0 8px; opacity: 0.95; }
+
+    .pricing-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap:18px; margin-top:20px; }
+    .pricing-card { background: rgba(255,255,255,0.98); border-radius:12px; padding:18px; text-align:center; box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+    .pricing-card h3 { margin: 8px 0; font-family:krona-one, sans-serif; color:#222; }
+    .price { font-size:28px; font-weight:700; color:#2E3192; margin-bottom:10px; }
+    .features { text-align:left; margin:12px 0 16px; color:#333; }
+    .btn-cta { display:inline-block; padding:10px 16px; border-radius:8px; text-decoration:none; background:#2E3192; color:#fff; font-weight:600; }
+
+    /* OLD simple calculator hooks (kept harmlessly) */
+    #pricing-calculator { background: rgba(255,255,255,0.98); border-radius:12px; padding:18px; margin-top:22px; }
+    #pricing-calculator h2 { margin:0 0 8px; font-family:coda, sans-serif; }
+    .svc-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap:12px; }
+    .svc-item { display:block; padding:12px; border-radius:8px; border:1px solid rgba(0,0,0,0.06); }
+    .svc-item strong { display:block; }
+    .svc-item .price-small { margin-top:8px; font-weight:700; color:#2E3192; }
+    #total-row { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:18px; flex-wrap:wrap; }
+    #total-amount { color:#2E3192; font-weight:700; font-size:18px; }
+
+    @media (max-width:700px){
+      .hero h1 { font-size:28px; }
+    }
+
+    /* Overall section (fancy calculator styling) */
+    .pricing-calculator {
+      padding: 3rem 1.5rem;
+      border-radius: 18px;
+      background: radial-gradient(circle at top left, #e0f2fe 0, #f9fafb 45%, #ffffff 100%);
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .pc-header {
+      max-width: 560px;
+      margin-bottom: 2rem;
+    }
+
+    .pc-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #2563eb;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    #pricing-calculator h2 {
+      font-size: clamp(1.75rem, 2.2vw, 2.1rem);
+      margin: 0 0 0.35rem;
+      color: #0f172a;
+    }
+
+    .pc-subtitle {
+      margin: 0;
+      color: #4b5563;
+      font-size: 0.95rem;
+    }
+
+    /* --- Quick questionnaire button + wizard --- */
+
+/* Hide the inline questions but keep them in the DOM for JS */
+.pc-questions-list {
+  display: none;
+}
+
+/* Button that launches the wizard */
+.pc-qq-btn {
+  margin-top: 0.9rem;
+  padding: 0.8rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid #2563eb;
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.5);
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    filter 0.18s ease;
+}
+
+.pc-qq-btn::before {
+  content: "⏱️";
+  font-size: 1rem;
+}
+
+.pc-qq-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 40px rgba(37, 99, 235, 0.7);
+  filter: brightness(1.04);
+}
+
+/* Full-screen overlay */
+.qq-overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(15, 23, 42, 0.85),
+    rgba(15, 23, 42, 0.95)
+  );
+  backdrop-filter: blur(6px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+
+  /* Hidden by default */
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1.02);
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.qq-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+
+/* Inner wizard card */
+.qq-inner {
+  background: radial-gradient(circle at top left, #eef2ff, #f9fafb 40%, #ffffff 100%);
+  border-radius: 22px;
+  max-width: 640px;
+  width: min(640px, 92%);
+  padding: 2.4rem 2.3rem 2rem;
+  box-shadow: 0 28px 70px rgba(15, 23, 42, 0.6);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle top highlight strip */
+.qq-inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), transparent 50%);
+  pointer-events: none;
+}
+
+/* Close (X) button */
+.qq-close {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  border: none;
+  background: rgba(15, 23, 42, 0.04);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #6b7280;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.18s ease,
+    color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.qq-close:hover {
+  background: rgba(15, 23, 42, 0.08);
+  color: #111827;
+  transform: translateY(-1px);
+}
+
+/* Header / progress area */
+.qq-header {
+  margin-bottom: 1.4rem;
+}
+
+.qq-progress {
+  margin: 0 0 0.55rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+/* Simple progress bar */
+.qq-progress-bar {
+  position: relative;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.35);
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.qq-progress-fill {
+  position: absolute;
+  inset: 0;
+  width: calc((var(--qq-step, 1) / var(--qq-total, 6)) * 100%);
+  background: linear-gradient(90deg, #2563eb, #4f46e5);
+  border-radius: inherit;
+  transition: width 0.25s ease-out;
+}
+
+/* Each step (page) */
+.qq-step {
+  display: none;
+}
+
+.qq-step-active {
+  display: block;
+}
+
+/* Big question text */
+.qq-question {
+  margin: 0 0 1.6rem;
+  font-size: clamp(1.6rem, 2.4vw, 2rem);
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+
+/* Yes / No options */
+.qq-options {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.6rem;
+}
+
+.qq-options label {
+  cursor: pointer;
+  padding: 1rem 1.4rem;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 160px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+.qq-options input[type="radio"] {
+  display: none;
+}
+
+.qq-options input[type="radio"]:checked + span {
+  color: #1d4ed8;
+}
+
+.qq-options input[type="radio"]:checked + span::before {
+  content: "✓ ";
+  font-weight: 700;
+}
+
+
+
+.qq-options input[type="radio"] {
+  accent-color: #2563eb;
+}
+
+/* Slight “selected” feel when radio is checked */
+.qq-options input[type="radio"]:checked + span {
+  font-weight: 600;
+  color: #1d4ed8;
+}
+
+.qq-options label:hover {
+  background: #eff6ff;
+  border-color: #2563eb;
+  box-shadow: 0 14px 30px rgba(37, 99, 235, 0.22);
+  transform: translateY(-1px);
+}
+
+.qq-options input[type="radio"]:checked + span {
+  background: linear-gradient(135deg, #eff6ff, #ffffff);
+  border: 1px solid #2563eb;
+  box-shadow: 0 16px 40px rgba(37, 99, 235, 0.25);
+  padding: 1rem 1.4rem;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+
+/* Next button */
+.qq-next {
+  padding: 0.85rem 2.2rem;
+  letter-spacing: 0.03em;
+}
+
+
+.qq-next::after {
+  content: "→";
+  margin-left: 0.6rem;
+  font-size: 1.1rem;
+}
+
+
+.qq-step:last-child .qq-next::after {
+  content: "✓";
+}
+
+.qq-next:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 20px 40px rgba(37, 99, 235, 0.75);
+  filter: brightness(1.05);
+}
+
+/* Error message */
+.qq-error {
+  margin-top: 0.7rem;
+  font-size: 0.8rem;
+  color: #b91c1c;
+}
+
+/* Mobile tweaks */
+@media (max-width: 640px) {
+  .qq-inner {
+    padding: 1.8rem 1.4rem 1.5rem;
+    border-radius: 18px;
+  }
+
+  .qq-question {
+    font-size: 1.3rem;
+  }
+
+  .qq-options {
+    flex-direction: column;
+  }
+
+  .qq-options label {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .qq-next {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+
+.qq-next:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 38px rgba(37, 99, 235, 0.7);
+  filter: brightness(1.03);
+}
+
+/* Error message */
+.qq-error {
+  margin-top: 0.6rem;
+  font-size: 0.8rem;
+  color: #b91c1c;
+}
+
+/* Mobile tweaks */
+@media (max-width: 640px) {
+  .qq-inner {
+    padding: 1.7rem 1.3rem 1.4rem;
+  }
+
+  .qq-options {
+    flex-direction: column;
+  }
+
+}
+
+.btn-cta {
+  color: white !important;
+}
+
+/* Progress bar */
+.qq-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 1.6rem;
+}
+
+.qq-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  border-radius: 999px;
+  transition: width 0.35s ease;
+}
+
+:root {
+  --hero-bg: #071033;
+}
+
+#heroCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  background: var(--hero-bg);
+}
+
+/* Make sure site content sits above canvas */
+#page,
+main {
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Fix Muse menu layering after hero canvas --- */
+#u2163-bw,
+#u2163,
+#u2163_align_to_page,
+
+
+
+
+/* Keep canvas behind everything */
+#heroCanvas {
+  z-index: 0 !important;
+}
+/* Force menu order: Articles then Pricing */
+
+
+
+
+/* Explicit ordering */
+#u2041 { order: 1; }  /* Home */
+#u2078 { order: 2; }  /* About */
+#u2107 { order: 3; }  /* Services */
+#u2135 { order: 4; }  /* Contact */
+#u2976 { order: 5; }  /* Articles */
+#u4000 { order: 6; }  /* Pricing */
+
+/* --- Keep Muse layout but move Pricing after Articles --- */
+
+/* Articles stays where it is */
+#u2976 {
+  position: relative;
+  left: 0;
+}
+
+
+
+
+
+/* Reset Articles */
+#u2976 {
+  position: relative !important;
+  margin-right: -10000px !important;
+  left: 380px !important;    /* put it after Contact */
+}
+
+
+
+/* --- Shift menu left so Pricing fits naturally --- */
+#u2163_align_to_page {
+  transform: translateX(-80px);
+}
+
+
+
+/* Remove the dark background behind the menu */
+#u2163-bw {
+  background: transparent !important;
+  backdrop-filter: none !important;
+}
+
+
+
+/* --- Make sure nothing sits on top of the menu --- */
+#heroCanvas {
+  pointer-events: none !important;
+}
+
+/* Nav bar and menu must sit above everything */
+#u2163-bw,
+#u2163,
+#u2163_align_to_page,
+#menuu2033 {
+  position: relative !important;
+  z-index: 9999 !important;
+}
+
+/* Force menu links to be clickable */
+#menuu2033 a {
+  position: relative !important;
+  z-index: 10000 !important;
+  pointer-events: auto !important;
+}
+/* Hover effect for Pricing tab */
+#u4001:hover {
+  background: rgba(255,255,255,0.12) !important;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.18) inset;
+  border-radius: 10px;
+}
+
+/* Keep it transparent when active but not hovered */
+#u4001.MuseMenuActive {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+
+
+/* Force hover on Pricing even when active */
+#u4001.MuseMenuActive:hover {
+  background: rgba(255,255,255,0.12) !important;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.18) inset !important;
+  border-radius: 10px;
+}
+
+
+.billing-btn {
+  padding: 0.4rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid #c7d2fe;
+  background: #eef2ff;
+  color: #1e3a8a;
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+.billing-active {
+  background: linear-gradient(135deg,#2563eb,#4f46e5);
+  color: white;
+  border-color: transparent;
+}
+
+
+
+#recommendation-box { display: none; }
+#recommendation-box.show { display: block !important; }
+
+.camira-trust {
+  margin: 3rem auto 2rem;
+  max-width: 920px;
+  background: linear-gradient(135deg,#f8fafc,#ffffff);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 18px 40px rgba(15,23,42,0.12);
+  border: 1px solid #e5e7eb;
+}
+
+.trust-inner {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.trust-image img {
+  width: 100%;
+  border-radius: 14px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+  object-fit: cover;
+}
+
+.trust-content blockquote {
+  margin: 0 0 0.8rem;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: #0f172a;
+  font-style: italic;
+}
+
+.trust-author {
+  margin: 0 0 1.2rem;
+  font-weight: 600;
+  color: #2563eb;
+  font-size: 0.9rem;
+}
+
+.trust-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.trust-badges .badge {
+  background: #eff6ff;
+  color: #1e3a8a;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1px solid #bfdbfe;
+}
+
+@media (max-width: 720px) {
+  .trust-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .trust-image {
+    max-width: 260px;
+    margin: 0 auto;
+  }
+
+  .trust-badges {
+    justify-content: center;
+  }
+}
+.camira-trust {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  pointer-events: none;
+}
+
+.camira-trust.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+
+
+
+
+  </style>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+
+</head>
+<body>
+  <canvas id="heroCanvas" aria-hidden="true"></canvas>
+
+  <div id="page" class="clearfix">
+    <!-- Top nav (keeps your existing structure & IDs so styles match) -->
+    <div id="u2163-bw" class="browser_width colelem"><div id="u2163">
+      <div id="u2163_align_to_page" class="clearfix">
+        <nav class="MenuBar rounded-corners clearfix grpelem" id="menuu2033">
+          <!-- Home -->
+          <div class="MenuItemContainer clearfix grpelem" id="u2041">
+            <a class="nonblock nontext MenuItem MenuItemWithSubMenu anim_swing rounded-corners clearfix colelem" id="u2042" href="index.html#home">
+              <div class="MenuItemLabel NoWrap rounded-corners clearfix grpelem" id="u2043-4"><p>Home</p></div>
+            </a>
+          </div>
+
+          <!-- About -->
+          <div class="MenuItemContainer clearfix grpelem" id="u2078">
+            <a class="nonblock nontext MenuItem MenuItemWithSubMenu anim_swing rounded-corners clearfix colelem" id="u2079" href="index.html#about">
+              <div class="MenuItemLabel NoWrap rounded-corners clearfix grpelem" id="u2081-4"><p>About Us</p></div>
+            </a>
+          </div>
+
+          <!-- Services -->
+          <div class="MenuItemContainer clearfix grpelem" id="u2107">
+            <a class="nonblock nontext MenuItem MenuItemWithSubMenu anim_swing rounded-corners clearfix colelem" id="u2108" href="index.html#services">
+              <div class="MenuItemLabel NoWrap rounded-corners clearfix grpelem" id="u2109-4"><p>Services</p></div>
+            </a>
+          </div>
+
+          <!-- Contact -->
+          <div class="MenuItemContainer clearfix grpelem" id="u2135">
+            <a class="nonblock nontext MenuItem MenuItemWithSubMenu anim_swing rounded-corners clearfix colelem" id="u2138" href="index.html#contact">
+              <div class="MenuItemLabel NoWrap rounded-corners clearfix grpelem" id="u2139-4"><p>Contact Us</p></div>
+            </a>
+          </div>
+
+          <!-- Articles -->
+          <div class="MenuItemContainer clearfix grpelem" id="u2976">
+            <a class="nonblock nontext MenuItem MenuItemWithSubMenu rounded-corners clearfix colelem" id="u2977" href="Articles.html">
+              <div class="MenuItemLabel NoWrap rounded-corners clearfix grpelem" id="u2979-4"><p>Articles</p></div>
+            </a>
+          </div>
+
+          <!-- Pricing (active) -->
+          <!-- Pricing -->
+<div class="MenuItemContainer clearfix grpelem" id="u4000" >
+  <a class="nonblock nontext MenuItem MenuItemWithSubMenu anim_swing rounded-corners clearfix colelem MuseMenuActive" id="u4001" href="Pricing.html" style="
+     background: transparent !important;
+     box-shadow: none !important;
+   "
+   onmouseover="this.style.background='rgba(255,255,255,0.12)'"
+   onmouseout="this.style.background='transparent'">
+    <div class="MenuItemLabel NoWrap rounded-corners clearfix grpelem" id="u4002-4"><p>Pricing</p></div>
+  </a>
+</div>
+        </nav>
+      </div>
+    </div></div>
+
+    <main>
+      <section class="hero">
+        <h1>Pricing</h1><br>
+        <p>Transparent fees for accounting & advisory services — build a package and get an instant estimate.</p>
+      </section>
+
+      <!-- Calculator: questionnaire + interactive services selector -->
+      <section id="pricing-calculator" class="pricing-calculator">
+        <div class="pc-header">
+          <p class="pc-eyebrow">Interactive quote</p>
+          <h2>Build your package</h2>
+          <p class="pc-subtitle">
+            Start with a few quick questions, then review the services we’ve selected for you.
+            Click <strong>"Get Started"</strong> to email your selection.
+          </p>
+        </div>
+
+        <form id="svc-form" aria-describedby="calc-total-desc">
+          <!-- Step 1: Questionnaire -->
+          <div class="pc-questions">
+  
+
+  
+            <div class="pc-questions">
+  <h3 class="pc-questions-title">Quick questionnaire</h3>
+  <p class="pc-questions-sub">
+    Click the button below and answer a few quick questions.
+    We’ll pre-select a suggested package for you.
+  </p>
+
+  <!-- Button to open wizard -->
+  <button type="button" class="pc-qq-btn" id="start-qq">
+    ⚡ Start quick questionnaire
+  </button>
+
+  <!-- Keep the original questions hidden for the existing JS logic -->
+  <div class="pc-questions-list" aria-hidden="true">
+    <div class="pc-question">
+      <p>Do you need us to handle your basic monthly bookkeeping?</p>
+      <label><input type="radio" name="q-basic" value="yes"> Yes</label>
+      <label><input type="radio" name="q-basic" value="no"> No</label>
+    </div>
+
+    <div class="pc-question">
+      <p>Do you want more detailed bookkeeping with budgets and close tracking?</p>
+      <label><input type="radio" name="q-full" value="yes"> Yes</label>
+      <label><input type="radio" name="q-full" value="no"> No</label>
+    </div>
+
+    <div class="pc-question">
+      <p>Do you need us to handle your tax filings and give tax advice?</p>
+      <label><input type="radio" name="q-tax" value="yes"> Yes</label>
+      <label><input type="radio" name="q-tax" value="no"> No</label>
+    </div>
+
+    <div class="pc-question">
+      <p>Do you have employees and need monthly payroll processing?</p>
+      <label><input type="radio" name="q-payroll" value="yes"> Yes</label>
+      <label><input type="radio" name="q-payroll" value="no"> No</label>
+    </div>
+
+    <div class="pc-question">
+      <p>Do you want weekly bookkeeping updates instead of monthly?</p>
+      <label><input type="radio" name="q-weekly" value="yes"> Yes</label>
+      <label><input type="radio" name="q-weekly" value="no"> No</label>
+    </div>
+
+    <div class="pc-question">
+      <p>Do you want priority support with faster response times?</p>
+      <label><input type="radio" name="q-priority" value="yes"> Yes</label>
+      <label><input type="radio" name="q-priority" value="no"> No</label>
+    </div>
+  </div>
+</div>
+
+<!-- Full-screen questionnaire wizard -->
+<div class="qq-overlay" id="qq-overlay" aria-hidden="true">
+  <div class="qq-inner" role="dialog" aria-modal="true" aria-labelledby="qq-step-indicator">
+    <button type="button" class="qq-close" id="qq-close" aria-label="Close questionnaire">&times;</button>
+
+    <p class="qq-progress" id="qq-step-indicator">Question 1 of 6</p>
+
+    <div class="qq-progress-bar">
+  <div class="qq-progress-fill" id="qq-progress-fill"></div>
+</div>
+
+
+    <!-- Step 1 -->
+    <div class="qq-step qq-step-active" data-question="q-basic">
+      <p class="qq-question">Do you need us to handle your basic monthly bookkeeping?</p>
+      <div class="qq-options">
+        <label>
+          <input type="radio" name="qq-q-basic" value="yes">
+          <span>Yes</span>
+        </label>
+        <label>
+          <input type="radio" name="qq-q-basic" value="no">
+          <span>No</span>
+        </label>
+      </div>
+      <button type="button" class="qq-next">Next</button>
+      <p class="qq-error"></p>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="qq-step" data-question="q-full">
+      <p class="qq-question">Do you want more detailed bookkeeping with budgets and close tracking?</p>
+      <div class="qq-options">
+        <label>
+          <input type="radio" name="qq-q-full" value="yes">
+          <span>Yes</span>
+        </label>
+        <label>
+          <input type="radio" name="qq-q-full" value="no">
+          <span>No</span>
+        </label>
+      </div>
+      <button type="button" class="qq-next">Next</button>
+      <p class="qq-error"></p>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="qq-step" data-question="q-tax">
+      <p class="qq-question">Do you need us to handle your tax filings and give tax advice?</p>
+      <div class="qq-options">
+        <label>
+          <input type="radio" name="qq-q-tax" value="yes">
+          <span>Yes</span>
+        </label>
+        <label>
+          <input type="radio" name="qq-q-tax" value="no">
+          <span>No</span>
+        </label>
+      </div>
+      <button type="button" class="qq-next">Next</button>
+      <p class="qq-error"></p>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="qq-step" data-question="q-payroll">
+      <p class="qq-question">Do you have employees and need monthly payroll processing?</p>
+      <div class="qq-options">
+        <label>
+          <input type="radio" name="qq-q-payroll" value="yes">
+          <span>Yes</span>
+        </label>
+        <label>
+          <input type="radio" name="qq-q-payroll" value="no">
+          <span>No</span>
+        </label>
+      </div>
+      <button type="button" class="qq-next">Next</button>
+      <p class="qq-error"></p>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="qq-step" data-question="q-weekly">
+      <p class="qq-question">Do you want weekly bookkeeping updates instead of monthly?</p>
+      <div class="qq-options">
+        <label>
+          <input type="radio" name="qq-q-weekly" value="yes">
+          <span>Yes</span>
+        </label>
+        <label>
+          <input type="radio" name="qq-q-weekly" value="no">
+          <span>No</span>
+        </label>
+      </div>
+      <button type="button" class="qq-next">Next</button>
+      <p class="qq-error"></p>
+    </div>
+
+    <!-- Step 6 (last) -->
+    <div class="qq-step" data-question="q-priority">
+      <p class="qq-question">Do you want priority support with faster response times?</p>
+      <div class="qq-options">
+        <label>
+          <input type="radio" name="qq-q-priority" value="yes">
+          <span>Yes</span>
+        </label>
+        <label>
+          <input type="radio" name="qq-q-priority" value="no">
+          <span>No</span>
+        </label>
+      </div>
+      <button type="button" class="qq-next">Finish</button>
+      <p class="qq-error"></p>
+    </div>
+  </div>
+</div>
+
+
+          <!-- Step 2: Services cards (auto-filled by answers, still editable) -->
+          <div class="svc-grid">
+            <label class="svc-item">
+              <input type="checkbox" name="service" value="Basic bookkeeping" data-price="499" />
+              <div class="svc-card">
+                <div class="svc-top">
+                  <span class="svc-name">Basic bookkeeping</span>
+                  <span class="svc-tag">Starter</span>
+                </div>
+                <p class="svc-desc">Monthly transactions, basic reports</p>
+                <div class="svc-bottom">
+                  <span class="svc-price">R499</span>
+                  <span class="svc-meta">per month</span>
+                </div>
+              </div>
+            </label>
+
+            <label class="svc-item">
+              <input type="checkbox" name="service" value="Full bookkeeping & budgets" data-price="1299" />
+              <div class="svc-card">
+                <div class="svc-top">
+                  <span class="svc-name">Full bookkeeping & budgets</span>
+                  <span class="svc-tag svc-tag-popular">Most popular</span>
+                </div>
+                <p class="svc-desc">Detailed monthly budgets & reconciliation</p>
+                <div class="svc-bottom">
+                  <span class="svc-price">R1,299</span>
+                  <span class="svc-meta">per month</span>
+                </div>
+              </div>
+            </label>
+
+            <label class="svc-item">
+              <input type="checkbox" name="service" value="Tax filings & advisory" data-price="2499" />
+              <div class="svc-card">
+                <div class="svc-top">
+                  <span class="svc-name">Tax filings & advisory</span>
+                  <span class="svc-tag">Tax specialist</span>
+                </div>
+                <p class="svc-desc">SARS filings, tax advice & planning</p>
+                <div class="svc-bottom">
+                  <span class="svc-price">R2,499</span>
+                  <span class="svc-meta">from, per year</span>
+                </div>
+              </div>
+            </label>
+
+            <label class="svc-item">
+              <input type="checkbox" name="service" value="Payroll processing" data-price="899" />
+              <div class="svc-card">
+                <div class="svc-top">
+                  <span class="svc-name">Payroll processing</span>
+                  <span class="svc-tag">Teams</span>
+                </div>
+                <p class="svc-desc">Monthly payroll & PAYE submissions</p>
+                <div class="svc-bottom">
+                  <span class="svc-price">R899</span>
+                  <span class="svc-meta">per month</span>
+                </div>
+              </div>
+            </label>
+
+            <label class="svc-item">
+              <input type="checkbox" name="service" value="Weekly bookkeeping" data-price="799" />
+              <div class="svc-card">
+                <div class="svc-top">
+                  <span class="svc-name">Weekly bookkeeping</span>
+                  <span class="svc-tag">More control</span>
+                </div>
+                <p class="svc-desc">More frequent updates & tighter controls</p>
+                <div class="svc-bottom">
+                  <span class="svc-price">R799</span>
+                  <span class="svc-meta">per month</span>
+                </div>
+              </div>
+            </label>
+
+            <label class="svc-item">
+              <input type="checkbox" name="service" value="Priority support" data-price="399" />
+              <div class="svc-card">
+                <div class="svc-top">
+                  <span class="svc-name">Priority support</span>
+                  <span class="svc-tag">Add-on</span>
+                </div>
+                <p class="svc-desc">Faster response times & phone support</p>
+                <div class="svc-bottom">
+                  <span class="svc-price">R399</span>
+                  <span class="svc-meta">per month</span>
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <div style="display:flex;justify-content:flex-end;gap:12px;margin-top:1rem;">
+  <button type="button" id="billing-monthly" class="billing-btn billing-active">Monthly</button>
+  <button type="button" id="billing-annual" class="billing-btn">Annual <span style="opacity:.7">(save 10%)</span></button>
+</div>
+
+<div id="recommendation-box" style="
+  margin-top: 1.5rem;
+  padding: 1rem 1.3rem;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #ecfeff, #f0f9ff);
+  border: 1px solid #bae6fd;
+  color: #0f172a;
+  display: none;
+">
+  <p style="margin:0;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:#0284c7;font-weight:700;">
+    Recommended package
+  </p>
+  <p id="rec-title" style="margin:0.2rem 0;font-size:1.1rem;font-weight:700;"></p>
+  <p id="rec-desc" style="margin:0;font-size:0.85rem;color:#334155;"></p>
+</div>
+
+
+
+          <div id="total-row" class="total-row">
+            <div class="total-info">
+              <p class="total-label">Your estimated total</p>
+              <div class="total-amount-wrapper">
+                <span id="total-amount" aria-live="polite">R0</span>
+                <span class="total-meta" id="billing-label">per month</span>
+
+              </div>
+            </div>
+
+            <div class="total-actions">
+              <button type="button" id="btn-reset">Reset</button>
+
+              <a id="whatsapp-btn" class="btn-cta" href="#" target="_blank">Get Started</a>
+
+            </div>
+
+              <div class="camira-trust">
+  <div class="trust-inner">
+    <div class="trust-image">
+      <img src="images/trust-accounting.jpg" alt="Camira Accounting Team">
+    </div>
+
+    <div class="trust-content">
+      <blockquote>
+        “Camira helped us get our finances under control and saved us thousands in unnecessary tax. 
+        We finally know where our business stands every month.”
+      </blockquote>
+      <p class="trust-author">— Small Business Owner, Gauteng</p>
+
+      <div class="trust-badges">
+        <div class="badge">✓ SARS Compliant</div>
+        <div class="badge">✓ Transparent Pricing</div>
+        
+        <div class="badge">✓ Dedicated Account Manager</div>
+        <div class="badge">✓ Trusted by SA Businesses</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+          </div>
+
+          <p id="calc-total-desc" class="pc-helper">
+            Selected services will be added to your request email when you click
+            <strong>"Get Started"</strong>.
+          </p>
+        </form>
+      </section>
+
+      <!-- Enquiry form -->
+      <section id="enquiry-section" style="margin-top:26px">
+        <div style="background:rgba(255,255,255,0.98);border-radius:12px;padding:20px;max-width:920px;margin:18px auto;box-shadow:0 10px 30px rgba(0,0,0,0.08)">
+          <h2 style="margin:0 0 6px;font-family:coda, sans-serif;">Enquiry & Contact</h2>
+          <p style="margin:0 0 14px;color:#444;">Complete the form below and we'll get back to you with a personalised quote. Your selected services and total are included automatically.</p>
+
+          <form id="enquiry-form" novalidate>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+              <label style="display:block;"><span style="font-weight:600;">Full name</span> <input name="name" type="text" required style="width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid #ddd;" placeholder="e.g. Wessle M"></label>
+
+              <label style="display:block;"><span style="font-weight:600;">Email</span> <input name="email" type="email" required style="width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid #ddd;" placeholder="you@company.co.za"></label>
+
+              <label style="display:block;"><span style="font-weight:600;">Phone</span> <input name="phone" type="tel" required style="width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid #ddd;" placeholder="+27 82 555 1234"></label>
+
+              <label style="display:block;"><span style="font-weight:600;">Company (optional)</span> <input name="company" type="text" style="width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid:#ddd;" placeholder="Company name"></label>
+            </div>
+
+            <label style="display:block;margin-top:12px;"><span style="font-weight:600;">Message</span>
+              <textarea name="message" rows="4" required style="width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid #ddd;" placeholder="Tell us about your needs or questions..."></textarea>
+            </label>
+
+            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;align-items:center;justify-content:space-between;">
+              <div style="min-width:220px"></div>
+
+              <div style="display:flex;gap:10px">
+                <button type="submit" id="enq-submit" style="background:#2E3192;color:#fff;padding:10px 14px;border-radius:8px;border:0;cursor:pointer;font-weight:700">Send Enquiry</button>
+              </div>
+            </div>
+
+            <p style="margin-top:12px;color:#666;font-size:13px;"><input type="checkbox" id="consent" required> I consent to having this website store my submitted information so you can respond to my enquiry.</p>
+
+            <div id="enq-feedback" role="status" aria-live="polite" style="margin-top:12px;color:#2E3192;display:none;font-weight:700"></div>
+          </form>
+
+        </div>
+      </section>
+
+      <div id="whatsapp-chat" style="margin:28px auto; text-align:center">
+        <a href="https://wa.me/27846022397" target="_blank"
+          style="
+            display:inline-flex;
+            align-items:center;
+            gap:14px;
+            background:#fff;
+            color:#25D366;
+            padding:18px 28px;
+            border-radius:60px;
+            text-decoration:none;
+            font-weight:700;
+            font-family:coda, sans-serif;
+            font-size:20px;
+            box-shadow:0 8px 24px rgba(0,0,0,0.18);
+          ">
+          <img src="images/whatsapp-icon.gif" alt="WhatsApp"
+              style="width:38px; height:38px">
+          <span>Chat with us</span>
+        </a>
+      </div>
+    </main>
+
+    <!-- Footer: copy your existing footer here if desired -->
+  </div>
+
+
+  
+
+  <!-- Questionnaire logic: link yes/no answers to the checkboxes -->
+  <script>
+  (function(){
+    const form = document.getElementById('svc-form');
+    if (!form) return;
+
+    const basicCb    = form.querySelector('input[name="service"][value="Basic bookkeeping"]');
+    const fullCb     = form.querySelector('input[name="service"][value="Full bookkeeping & budgets"]');
+    const taxCb      = form.querySelector('input[name="service"][value="Tax filings & advisory"]');
+    const payrollCb  = form.querySelector('input[name="service"][value="Payroll processing"]');
+    const weeklyCb   = form.querySelector('input[name="service"][value="Weekly bookkeeping"]');
+    const priorityCb = form.querySelector('input[name="service"][value="Priority support"]');
+
+    function triggerChange(cb) {
+      if (!cb) return;
+      cb.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+
+    function handleQuestion(name, value) {
+      const yes = value === 'yes';
+      switch (name) {
+        case 'q-basic':
+          if (basicCb) { basicCb.checked = yes; triggerChange(basicCb); }
+          break;
+        case 'q-full':
+          if (fullCb) { fullCb.checked = yes; triggerChange(fullCb); }
+          break;
+        case 'q-tax':
+          if (taxCb) { taxCb.checked = yes; triggerChange(taxCb); }
+          break;
+        case 'q-payroll':
+          if (payrollCb) { payrollCb.checked = yes; triggerChange(payrollCb); }
+          break;
+        case 'q-weekly':
+          if (weeklyCb) { weeklyCb.checked = yes; triggerChange(weeklyCb); }
+          break;
+        case 'q-priority':
+          if (priorityCb) { priorityCb.checked = yes; triggerChange(priorityCb); }
+          break;
+      }
+    }
+
+    const questionRadios = document.querySelectorAll('.pc-question input[type="radio"]');
+    questionRadios.forEach(r => {
+      r.addEventListener('change', function(){
+        handleQuestion(this.name, this.value);
+      });
+    });
+  })();
+  </script>
+
+  <script>
+  (function () {
+    const overlay   = document.getElementById('qq-overlay');
+    const startBtn  = document.getElementById('start-qq');
+    const closeBtn  = document.getElementById('qq-close');
+
+    if (!overlay || !startBtn) return;
+
+    const steps        = Array.from(overlay.querySelectorAll('.qq-step'));
+const stepIndicator = document.getElementById('qq-step-indicator');
+const progressFill  = document.getElementById('qq-progress-fill');
+let currentIndex   = 0;
+
+
+    function updateStepIndicator() {
+  if (stepIndicator) {
+    stepIndicator.textContent = 'Question ' + (currentIndex + 1) + ' of ' + steps.length;
+  }
+
+  if (progressFill) {
+    const percent = ((currentIndex + 1) / steps.length) * 100;
+    progressFill.style.width = percent + '%';
+  }
+}
+
+
+    function showStep(index) {
+      steps.forEach((step, i) => {
+        step.classList.toggle('qq-step-active', i === index);
+        const err = step.querySelector('.qq-error');
+        if (err) err.textContent = '';
+      });
+      currentIndex = index;
+      updateStepIndicator();
+    }
+
+    function syncAnswerToHiddenRadios(qName, answer) {
+      // Find the original hidden radio (inside .pc-questions-list) and trigger change
+      const target = document.querySelector('.pc-question input[name="' + qName + '"][value="' + answer + '"]');
+      if (target) {
+        target.checked = true;
+        target.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+    }
+
+    function openOverlay() {
+      overlay.classList.add('is-open');
+      showStep(0);
+    }
+
+    function closeOverlay() {
+      overlay.classList.remove('is-open');
+    }
+
+    // Start button
+    startBtn.addEventListener('click', openOverlay);
+
+    // Close button
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeOverlay);
+    }
+
+    // Click on backdrop closes as well
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) {
+        closeOverlay();
+      }
+    });
+
+    // For each step, wire the Next button
+    steps.forEach((step) => {
+      const nextBtn = step.querySelector('.qq-next');
+      if (!nextBtn) return;
+
+      nextBtn.addEventListener('click', function () {
+        const qName   = step.dataset.question; // e.g. "q-basic"
+        const checked = step.querySelector('input[type="radio"]:checked');
+        const errorEl = step.querySelector('.qq-error');
+
+        if (!checked) {
+          if (errorEl) {
+            errorEl.textContent = 'Please choose an answer to continue.';
+          }
+          return;
+        }
+
+        // Clear error if any
+        if (errorEl) errorEl.textContent = '';
+
+        // Sync answer back to hidden radios (which trigger your existing logic)
+        syncAnswerToHiddenRadios(qName, checked.value);
+
+        const stepIndex = steps.indexOf(step);
+        if (stepIndex < steps.length - 1) {
+          showStep(stepIndex + 1);
+        } else {
+          // Last step: close
+          closeOverlay();
+        }
+      });
+    });
+
+    // Init indicator
+    updateStepIndicator();
+  })();
+</script>
+
+<script>
+  (function () {
+    /* Modern, self-contained rewrite of the site's inline animation.
+       Behaviour matched to original:
+         - particles spawn near mouse/touch (multiple per event)
+         - particles have velocity, decay in radius, then are recycled
+         - lines are drawn between nearby particles
+         - responsive, DPR-aware, optimized pooling and debounced resize
+       Config below tweaks look/behaviour; adjust to taste.
+    */
+
+    const canvas = document.getElementById('heroCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Visual & behaviour configuration
+    const C = {
+      bg: '#071033',
+      dotColor: '#ffffff',
+      lineColor: '#ffffff',
+      baseRadius: 3.5,        // initial radius of spawned particles
+      maxParticles: 300,      // cap
+      spawnPerTouchMin: 1,    // min particles spawned on pointer move
+      spawnPerTouchMax: 4,    // max particles spawned on pointer move
+      spawnSpread: 10,        // px spread around pointer
+      friction: 0.99,         // velocity damping per frame
+      radiusDecay: 0.985,      // per-frame radius multiplier
+      minRadius: 0.5,         // particle dies below this radius
+      maxLinkDistance: 110,   // distance to draw connecting line
+      lineAlpha: 0.16,        // line global alpha
+      dotAlpha: 1.0,          // particle fill alpha
+      jitter: 0.05,         // random jitter added to velocity
+      maxVel: 0.9,            // clamp on velocity
+      dprClamp: 3             // limit DPR scaling to avoid huge canvases
+    };
+
+    // State
+    let width = 0, height = 0, DPR = 1;
+    let last = performance.now();
+    let running = true;
+    let particles = [];   // active particles
+    let pool = [];        // recycled particles
+
+    // pointer state (supports multi-touch array)
+    const pointers = []; // array of {x,y,active}
+
+    // Basic helpers
+    const rand = (a,b) => Math.random() * (b - a) + a;
+    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+
+    // Particle ctor / factory using pooling
+    function Particle() {
+      this.alive = false;
+      this.x = 0; this.y = 0;
+      this.vx = 0; this.vy = 0;
+      this.r = 0;
+      this.color = C.dotColor;
+    }
+    Particle.prototype.init = function (x,y,force) {
+      this.x = x;
+      this.y = y;
+      // give an initial random velocity biased by force
+      const ang = Math.random() * Math.PI * 2;
+      const speed = rand(0.2, 1.6) * (force || 1);
+      this.vx = Math.cos(ang) * speed + rand(-0.6, 0.6);
+      this.vy = Math.sin(ang) * speed + rand(-0.6, 0.6) - 0.3;
+      this.r = C.baseRadius * rand(0.7, 1.25);
+      this.alive = true;
+    };
+    Particle.prototype.move = function () {
+      // jitter to keep things varied
+      this.vx += rand(-C.jitter, C.jitter);
+      this.vy += rand(-C.jitter, C.jitter);
+
+      // apply friction and clamp
+      this.vx *= C.friction;
+      this.vy *= C.friction;
+      this.vx = clamp(this.vx, -C.maxVel, C.maxVel);
+      this.vy = clamp(this.vy, -C.maxVel, C.maxVel);
+
+      this.x += this.vx;
+      this.y += this.vy - 0.25;   // gentle upward drift
+
+
+      // radius decay
+      this.r *= C.radiusDecay;
+      if (this.r <= C.minRadius) this.alive = false;
+    };
+    Particle.prototype.draw = function (ctx) {
+  if (!this.alive) return;
+
+  const radius = Math.max(1, this.r * 1.8);
+
+  const gradient = ctx.createRadialGradient(
+    this.x, this.y, 0,
+    this.x, this.y, radius
+  );
+
+  gradient.addColorStop(0, "rgba(255,255,255,0.9)");
+  gradient.addColorStop(0.4, "rgba(255,255,255,0.35)");
+  gradient.addColorStop(1, "rgba(255,255,255,0)");
+
+  ctx.beginPath();
+  ctx.arc(this.x, this.y, radius, 0, Math.PI * 2);
+  ctx.fillStyle = gradient;
+  ctx.fill();
+};
+
+
+    // Spawn (use pool if available)
+    function spawnAt(x,y,force) {
+      let p = pool.length ? pool.pop() : new Particle();
+      p.init(x + rand(-C.spawnSpread, C.spawnSpread), y + rand(-C.spawnSpread, C.spawnSpread), force);
+      particles.push(p);
+    }
+
+    // Create multiple spawns around pointer (this matches original behaviour)
+    function spawnBurst(x,y) {
+      const count = Math.round(rand(C.spawnPerTouchMin, C.spawnPerTouchMax));
+      for (let i = 0; i < count; i++) {
+        if ((particles.length + pool.length) >= C.maxParticles) break;
+        spawnAt(x, y, rand(0.6, 1.4));
+      }
+    }
+
+    // Resize canvas (DPR-aware, debounced)
+    let resizeTimer = 0;
+    function resize() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        DPR = Math.min(C.dprClamp, Math.max(1, window.devicePixelRatio || 1));
+        width = Math.max(320, window.innerWidth);
+        height = Math.max(200, window.innerHeight);
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+        canvas.width = Math.floor(width * DPR);
+        canvas.height = Math.floor(height * DPR);
+        ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+        // keep background filled
+        ctx.fillStyle = C.bg;
+        ctx.fillRect(0,0,width,height);
+      }, 80);
+    }
+
+    // Pointer handling (mouse + touch)
+    function onPointerMove(e) {
+      // support mouse and touch events
+      let x, y;
+      if (e.touches && e.touches.length) {
+        // spawn for each touch point
+        for (let i = 0; i < e.touches.length; i++) {
+          const t = e.touches[i];
+          const rect = canvas.getBoundingClientRect();
+          x = t.clientX - rect.left;
+          y = t.clientY - rect.top;
+          spawnBurst(x, y);
+        }
+      } else {
+        const rect = canvas.getBoundingClientRect();
+        x = e.clientX - rect.left;
+        y = e.clientY - rect.top;
+        spawnBurst(x, y);
+      }
+    }
+
+    function onPointerDown(e) { onPointerMove(e); }
+    function onPointerUp() {} // no-op
+
+    // Main update loop (moves particles, reclaims dead ones)
+    function update(dt) {
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        if (!p) continue;
+        p.move();
+        // recycle off-screen or dead
+        if (!p.alive || p.x < -30 || p.x > width + 30 || p.y < -30 || p.y > height + 30) {
+          pool.push(particles.splice(i, 1)[0]);
+        }
+      }
+    }
+
+    // Draw particles and connecting lines
+    function draw() {
+      // background
+      ctx.fillStyle = C.bg;
+      ctx.fillRect(0, 0, width, height);
+
+     
+
+      // draw particles on top
+      ctx.globalAlpha = C.dotAlpha;
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].draw(ctx);
+      }
+    }
+
+    // Animation frame
+let raf = null;
+function loop(now) {
+  const dt = Math.min(50, now - last) / 16.6667;
+  last = now;
+
+  // Add slow ambient bubbles
+  if (particles.length < C.maxParticles * 0.5 && Math.random() < 0.04) {
+    spawnAt(rand(0, width), height + 20, 0.4);
+  }
+
+  update(dt);
+  draw();
+  raf = requestAnimationFrame(loop);
+}
+
+
+    // Init
+    function init() {
+      resize();
+      // initial ambient particles (like original had a soft background)
+      const initialCount = Math.round( (window.innerWidth * window.innerHeight) / 160000 * 12 );
+      for (let i = 0; i < initialCount; i++) {
+        const px = rand(0, width), py = rand(0, height);
+        spawnAt(px, py, rand(0.2, 0.9));
+      }
+
+      // event listeners
+      window.addEventListener('resize', resize, { passive: true });
+      window.addEventListener('mousemove', onPointerMove, { passive: true });
+      window.addEventListener('mousedown', onPointerDown, { passive: true });
+      window.addEventListener('touchstart', onPointerMove, { passive: true });
+      window.addEventListener('touchmove', onPointerMove, { passive: true });
+      window.addEventListener('touchend', onPointerUp, { passive: true });
+
+      last = performance.now();
+      raf = requestAnimationFrame(loop);
+    }
+
+    // Clean-up helper (if you want to remove later)
+    function destroy() {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('resize', resize);
+      window.removeEventListener('mousemove', onPointerMove);
+      window.removeEventListener('mousedown', onPointerDown);
+      window.removeEventListener('touchstart', onPointerMove);
+      window.removeEventListener('touchmove', onPointerMove);
+      window.removeEventListener('touchend', onPointerUp);
+    }
+
+    // Start
+    init();
+
+    // expose small API to tweak live if you want
+    window.CamiraHeroBG = {
+      spawnAt,
+      setConfig: (obj) => { Object.assign(C, obj); },
+      destroy
+    };
+  })();
+  </script>
+
+<script>
+
+
+
+  let msg = `Hi Camira, I'm ${name}.%0A%0A`;
+  msg += `I'd like a quote for:%0A`;
+
+  if (sel.selected.length) {
+    sel.selected.forEach(s => {
+      msg += `• ${s}%0A`;
+    });
+  } else {
+    msg += `• Accounting services%0A`;
+  }
+
+  msg += `%0AEstimated total: ${formatCurrency(sel.total)} `;
+  msg += billing === "monthly" ? "per month" : "per year (10% discount)";
+  msg += `%0A%0AThank you.`;
+
+  whatsappBtn.href = `https://wa.me/27846022397?text=${msg}`;
+
+</script>
+
+<script>
+(function(){
+
+  const form = document.getElementById("svc-form");
+  if(!form) return;
+
+  const checkboxes = form.querySelectorAll('input[name="service"]');
+  const totalEl = document.getElementById("total-amount");
+  const billingLabel = document.getElementById("billing-label");
+  const monthlyBtn = document.getElementById("billing-monthly");
+  const annualBtn = document.getElementById("billing-annual");
+  const resetBtn = document.getElementById("btn-reset");
+
+  const recBox = document.getElementById("recommendation-box");
+  const recTitle = document.getElementById("rec-title");
+  const recDesc = document.getElementById("rec-desc");
+
+  const whatsappBtn = document.getElementById("whatsapp-btn");
+  const enquiryForm = document.getElementById("enquiry-form");
+  const nameInput = enquiryForm.querySelector('input[name="name"]');
+
+  let billing = "monthly";
+
+  const QMAP = {
+    "q-basic":"Basic bookkeeping",
+    "q-full":"Full bookkeeping & budgets",
+    "q-tax":"Tax filings & advisory",
+    "q-payroll":"Payroll processing",
+    "q-weekly":"Weekly bookkeeping",
+    "q-priority":"Priority support"
+  };
+
+  function money(v){ return "R" + v.toLocaleString("en-ZA"); }
+
+  function setService(name,on){
+    const cb = form.querySelector(`input[value="${name}"]`);
+    if(!cb) return;
+    cb.checked = on;
+    cb.dispatchEvent(new Event("change",{bubbles:true}));
+  }
+
+  document.querySelectorAll(".pc-question input[type=radio]").forEach(r=>{
+    r.addEventListener("change",()=> setService(QMAP[r.name], r.value==="yes"));
+  });
+
+  function getSelection(){
+    let total = 0;
+    const items = [];
+    checkboxes.forEach(cb=>{
+      if(cb.checked){
+        total += Number(cb.dataset.price||0);
+        items.push(cb.value);
+      }
+    });
+    if(billing==="annual") total = total*12*0.9;
+    return {items,total};
+  }
+
+  function recommend(){
+  const has = n => form.querySelector(`input[value="${n}"]`)?.checked;
+
+  if(has("Full bookkeeping & budgets") && has("Tax filings & advisory") && has("Payroll processing")){
+    recTitle.textContent="Growing Business";
+    recDesc.textContent="For companies with staff needing full financial control.";
+  }
+  else if(has("Basic bookkeeping") && has("Tax filings & advisory")){
+    recTitle.textContent="Small Business";
+    recDesc.textContent="Ideal for compliant small businesses.";
+  }
+  else if(has("Basic bookkeeping")){
+    recTitle.textContent="Starter";
+    recDesc.textContent="Perfect for startups.";
+  }
+  else if(has("Weekly bookkeeping") || has("Priority support")){
+    recTitle.textContent="Scale";
+    recDesc.textContent="For fast-moving businesses.";
+  }
+  else {
+    recBox.classList.remove("show");
+    return;
+  }
+
+  recBox.classList.add("show");
+}
+
+
+  function updateWhatsApp(){
+    const {items,total} = getSelection();
+    const name = nameInput.value || "—";
+    let msg = `Hi Camira, I'm ${name}.\n\nI'd like a quote for:\n`;
+    items.length ? items.forEach(i=>msg+=`• ${i}\n`) : msg+="• Accounting services\n";
+    msg += `\nEstimated total: ${money(total)} ${billing==="monthly"?"per month":"per year (10% off)"}`;
+    whatsappBtn.href="https://wa.me/27846022397?text="+encodeURIComponent(msg);
+  }
+
+  function update(){
+    const {total} = getSelection();
+    totalEl.textContent = money(total);
+    billingLabel.textContent = billing==="monthly"?"per month":"per year (10% discount)";
+    recommend();
+    updateWhatsApp();
+  }
+
+  monthlyBtn.onclick=()=>{ billing="monthly"; monthlyBtn.classList.add("billing-active"); annualBtn.classList.remove("billing-active"); update(); };
+  annualBtn.onclick=()=>{ billing="annual"; annualBtn.classList.add("billing-active"); monthlyBtn.classList.remove("billing-active"); update(); };
+
+  checkboxes.forEach(cb=>cb.addEventListener("change",update));
+  nameInput.addEventListener("input",update);
+  resetBtn.onclick=()=>{ checkboxes.forEach(c=>c.checked=false); recBox.style.display="none"; update(); };
+
+  update();
+
+  resetBtn.onclick=()=>{
+  checkboxes.forEach(c=>c.checked=false);
+  recBox.classList.remove("show");
+  update();
+};
+
+
+})();
+</script>
+
+<script>
+(function () {
+  const trust = document.querySelector('.camira-trust');
+  const form = document.getElementById('svc-form');
+  if (!trust || !form) return;
+
+  let shown = false;
+
+  function maybeShowTrust() {
+    if (shown) return;
+
+    const checked = form.querySelectorAll('input[name="service"]:checked').length;
+    if (checked > 0) {
+      trust.classList.add('is-visible');
+      shown = true;
+    }
+  }
+
+  form.addEventListener('change', maybeShowTrust);
+})();
+</script>
+
+
+
+
+
+ 
+
+</body>
+</html>
