@@ -1433,7 +1433,8 @@ let currentIndex   = 0;
     function spawnBurst(x,y) {
       const count = Math.round(rand(C.spawnPerTouchMin, C.spawnPerTouchMax));
       for (let i = 0; i < count; i++) {
-        if ((particles.length + pool.length) >= C.maxParticles) break;
+        if (particles.length >= C.maxParticles) break;
+
         spawnAt(x, y, rand(0.6, 1.4));
       }
     }
