@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Camira — Pricing</title>
+  <title>Camira - Pricing</title>
 
   <!-- reuse your site CSS -->
   <link rel="stylesheet" href="css/site_global.css?crc=4185260426" />
@@ -112,14 +112,14 @@
 }
 
 .pc-qq-btn::before {
-  content: "⏱️";
+  content: "";
   font-size: 1rem;
 }
 
 .pc-qq-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 18px 40px rgba(37, 99, 235, 0.7);
-  filter: brightness(1.04);
+  box-shadow: 0 12px 26px rgba(37, 99, 235, 0.35);
+  filter: brightness(1.01);
 }
 
 /* Full-screen overlay */
@@ -293,7 +293,7 @@
 }
 
 .qq-options input[type="radio"]:checked + span::before {
-  content: "✓ ";
+  content: "OK ";
   font-weight: 700;
 }
 
@@ -303,7 +303,7 @@
   accent-color: #2563eb;
 }
 
-/* Slight “selected” feel when radio is checked */
+/* Slight selected feel when radio is checked */
 .qq-options input[type="radio"]:checked + span {
   font-weight: 600;
   color: #1d4ed8;
@@ -337,14 +337,14 @@
 
 
 .qq-next::after {
-  content: "→";
+  content: ">";
   margin-left: 0.6rem;
   font-size: 1.1rem;
 }
 
 
 .qq-step:last-child .qq-next::after {
-  content: "✓";
+  content: "Done";
 }
 
 .qq-next:hover {
@@ -735,7 +735,7 @@ main {
     <main>
       <section class="hero">
         <h1>Pricing</h1><br>
-        <p>Transparent fees for accounting & advisory services — build a package and get an instant estimate.</p>
+        <p>Transparent pricing for accounting and advisory services. Build a package and get an instant estimate.</p>
       </section>
 
       <!-- Calculator: questionnaire + interactive services selector -->
@@ -744,8 +744,8 @@ main {
           <p class="pc-eyebrow">Interactive quote</p>
           <h2>Build your package</h2>
           <p class="pc-subtitle">
-            Start with a few quick questions, then review the services we’ve selected for you.
-            Click <strong>"Get Started"</strong> to email your selection.
+            Start with a few quick questions, then review the services we have selected for you.
+            Click <strong>"Send via WhatsApp"</strong> to share your selection instantly.
           </p>
         </div>
 
@@ -759,12 +759,12 @@ main {
   <h3 class="pc-questions-title">Quick questionnaire</h3>
   <p class="pc-questions-sub">
     Click the button below and answer a few quick questions.
-    We’ll pre-select a suggested package for you.
+    We will pre-select a suggested package for you.
   </p>
 
   <!-- Button to open wizard -->
   <button type="button" class="pc-qq-btn" id="start-qq">
-    ⚡ Start quick questionnaire
+    Start quick questionnaire
   </button>
 
   <!-- Keep the original questions hidden for the existing JS logic -->
@@ -1053,7 +1053,7 @@ main {
             <div class="total-actions">
               <button type="button" id="btn-reset">Reset</button>
 
-              <a id="whatsapp-btn" class="btn-cta" href="#" target="_blank">Get Started</a>
+              <a id="whatsapp-btn" class="btn-cta" href="#" target="_blank" rel="noopener noreferrer">Send via WhatsApp</a>
 
             </div>
 
@@ -1065,17 +1065,17 @@ main {
 
     <div class="trust-content">
       <blockquote>
-        “Camira helped us get our finances under control and saved us thousands in unnecessary tax. 
-        We finally know where our business stands every month.”
+        "Camira helped us get our finances under control and saved us thousands in unnecessary tax.
+        We finally know where our business stands every month."
       </blockquote>
-      <p class="trust-author">— Small Business Owner, Gauteng</p>
+      <p class="trust-author">- Small Business Owner, Gauteng</p>
 
       <div class="trust-badges">
-        <div class="badge">✓ SARS Compliant</div>
-        <div class="badge">✓ Transparent Pricing</div>
+        <div class="badge">SARS Compliant</div>
+        <div class="badge">Transparent Pricing</div>
         
-        <div class="badge">✓ Dedicated Account Manager</div>
-        <div class="badge">✓ Trusted by SA Businesses</div>
+        <div class="badge">Dedicated Account Manager</div>
+        <div class="badge">Trusted by SA Businesses</div>
       </div>
     </div>
   </div>
@@ -1084,8 +1084,8 @@ main {
           </div>
 
           <p id="calc-total-desc" class="pc-helper">
-            Selected services will be added to your request email when you click
-            <strong>"Get Started"</strong>.
+            Selected services will be added to your WhatsApp draft when you click
+            <strong>"Send via WhatsApp"</strong>.
           </p>
         </form>
       </section>
@@ -1128,7 +1128,7 @@ main {
       </section>
 
       <div id="whatsapp-chat" style="margin:28px auto; text-align:center">
-        <a href="https://wa.me/27846022397" target="_blank"
+        <a href="https://wa.me/27846022397" target="_blank" rel="noopener noreferrer"
           style="
             display:inline-flex;
             align-items:center;
@@ -1572,29 +1572,6 @@ function loop(now) {
   </script>
 
 <script>
-
-
-
-  let msg = `Hi Camira, I'm ${name}.%0A%0A`;
-  msg += `I'd like a quote for:%0A`;
-
-  if (sel.selected.length) {
-    sel.selected.forEach(s => {
-      msg += `• ${s}%0A`;
-    });
-  } else {
-    msg += `• Accounting services%0A`;
-  }
-
-  msg += `%0AEstimated total: ${formatCurrency(sel.total)} `;
-  msg += billing === "monthly" ? "per month" : "per year (10% discount)";
-  msg += `%0A%0AThank you.`;
-
-  whatsappBtn.href = `https://wa.me/27846022397?text=${msg}`;
-
-</script>
-
-<script>
 (function(){
 
   const form = document.getElementById("svc-form");
@@ -1682,9 +1659,9 @@ function loop(now) {
 
   function updateWhatsApp(){
     const {items,total} = getSelection();
-    const name = nameInput.value || "—";
+    const name = nameInput.value || "-";
     let msg = `Hi Camira, I'm ${name}.\n\nI'd like a quote for:\n`;
-    items.length ? items.forEach(i=>msg+=`• ${i}\n`) : msg+="• Accounting services\n";
+    items.length ? items.forEach(i=>msg+=`- ${i}\n`) : msg+="- Accounting services\n";
     msg += `\nEstimated total: ${money(total)} ${billing==="monthly"?"per month":"per year (10% off)"}`;
     whatsappBtn.href="https://wa.me/27846022397?text="+encodeURIComponent(msg);
   }
@@ -1744,5 +1721,49 @@ function loop(now) {
 
  
 
+
+<script>
+(function () {
+  const enquiryForm = document.getElementById("enquiry-form");
+  const feedback = document.getElementById("enq-feedback");
+  if (!enquiryForm || !feedback) return;
+
+  enquiryForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    if (!enquiryForm.reportValidity()) return;
+
+    const data = new FormData(enquiryForm);
+    const selected = Array.from(document.querySelectorAll('#svc-form input[name="service"]:checked'))
+      .map((el) => el.value);
+    const total = (document.getElementById("total-amount") || {}).textContent || "R0";
+    const billing = (document.getElementById("billing-label") || {}).textContent || "per month";
+
+    const bodyLines = [
+      "Name: " + (data.get("name") || ""),
+      "Email: " + (data.get("email") || ""),
+      "Phone: " + (data.get("phone") || ""),
+      "Company: " + (data.get("company") || ""),
+      "",
+      "Selected services:",
+      selected.length ? selected.map((s) => "- " + s).join("\n") : "- Accounting services",
+      "",
+      "Estimated total: " + total + " " + billing,
+      "",
+      "Message:",
+      (data.get("message") || "").toString()
+    ];
+
+    const subject = encodeURIComponent("Pricing enquiry - Camira website");
+    const body = encodeURIComponent(bodyLines.join("\n"));
+    window.location.href = "mailto:Info1@camira.co.za?subject=" + subject + "&body=" + body;
+
+    feedback.style.display = "block";
+    feedback.textContent = "Your email client has been opened with your enquiry details.";
+  });
+})();
+</script>
 </body>
 </html>
+
+
