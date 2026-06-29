@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Camira — Pricing</title>
+  <title>Camira - Pricing</title>
 
   <!-- reuse your site CSS -->
   <link rel="stylesheet" href="css/site_global.css?crc=4185260426" />
@@ -112,14 +112,14 @@
 }
 
 .pc-qq-btn::before {
-  content: "⏱️";
+  content: "";
   font-size: 1rem;
 }
 
 .pc-qq-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 18px 40px rgba(37, 99, 235, 0.7);
-  filter: brightness(1.04);
+  box-shadow: 0 12px 26px rgba(37, 99, 235, 0.35);
+  filter: brightness(1.01);
 }
 
 /* Full-screen overlay */
@@ -293,7 +293,7 @@
 }
 
 .qq-options input[type="radio"]:checked + span::before {
-  content: "✓ ";
+  content: "OK ";
   font-weight: 700;
 }
 
@@ -303,7 +303,7 @@
   accent-color: #2563eb;
 }
 
-/* Slight “selected” feel when radio is checked */
+/* Slight selected feel when radio is checked */
 .qq-options input[type="radio"]:checked + span {
   font-weight: 600;
   color: #1d4ed8;
@@ -337,14 +337,14 @@
 
 
 .qq-next::after {
-  content: "→";
+  content: ">";
   margin-left: 0.6rem;
   font-size: 1.1rem;
 }
 
 
 .qq-step:last-child .qq-next::after {
-  content: "✓";
+  content: "Done";
 }
 
 .qq-next:hover {
@@ -434,38 +434,11 @@
   transition: width 0.35s ease;
 }
 
-:root {
-  --hero-bg: #071033;
-}
-
-#heroCanvas {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 0;
-  pointer-events: none;
-  background: var(--hero-bg);
-}
-
-/* Make sure site content sits above canvas */
+/* Make sure site content sits above the page background */
 #page,
 main {
   position: relative;
   z-index: 1;
-}
-
-/* --- Fix Muse menu layering after hero canvas --- */
-#u2163-bw,
-#u2163,
-#u2163_align_to_page,
-
-
-
-
-/* Keep canvas behind everything */
-#heroCanvas {
-  z-index: 0 !important;
 }
 /* Force menu order: Articles then Pricing */
 
@@ -515,11 +488,6 @@ main {
 }
 
 
-
-/* --- Make sure nothing sits on top of the menu --- */
-#heroCanvas {
-  pointer-events: none !important;
-}
 
 /* Nav bar and menu must sit above everything */
 #u2163-bw,
@@ -663,6 +631,562 @@ main {
   pointer-events: auto;
 }
 
+/* --- Pricing page polish --- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 0;
+  background: #071033;
+  color: #0f172a;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(7, 16, 51, 0.22), rgba(7, 16, 51, 0.92)),
+    radial-gradient(circle at 18% 18%, rgba(96, 165, 250, 0.22), transparent 34%),
+    radial-gradient(circle at 82% 8%, rgba(45, 212, 191, 0.16), transparent 32%);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image: radial-gradient(rgba(255,255,255,0.9) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+#page {
+  width: min(1020px, 100%);
+  min-height: 0;
+  overflow-x: hidden;
+}
+
+main {
+  width: min(1020px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 28px 0 72px;
+}
+
+.hero {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: clamp(64px, 11vw, 112px) 16px 34px;
+  text-align: center;
+}
+
+.hero h1 {
+  margin: 0 0 14px;
+  color: #ffffff;
+  font-family: coda, Arial, sans-serif;
+  font-size: clamp(2.35rem, 5vw, 4.3rem);
+  line-height: 1.02;
+  text-shadow: 0 18px 45px rgba(0, 0, 0, 0.32);
+}
+
+.hero h1::after {
+  content: "";
+  display: block;
+  width: 74px;
+  height: 3px;
+  margin: 18px auto 0;
+  border-radius: 999px;
+  background: #2dd4bf;
+}
+
+.hero p {
+  max-width: 660px;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+.pricing-calculator,
+#enquiry-section > div {
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 8px !important;
+  background: rgba(255, 255, 255, 0.96) !important;
+  box-shadow: 0 26px 70px rgba(2, 6, 23, 0.34);
+}
+
+.pricing-calculator {
+  padding: clamp(22px, 4vw, 42px);
+  overflow: hidden;
+}
+
+.pc-header {
+  max-width: none;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 350px);
+  gap: 18px 32px;
+  align-items: center;
+  margin-bottom: 28px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.pc-header::after {
+  content: "Instant estimate";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: #ecfeff;
+  border: 1px solid #99f6e4;
+  color: #115e59;
+  font-weight: 700;
+  font-size: 0.82rem;
+  grid-column: 2;
+  grid-row: 1 / span 3;
+}
+
+.pc-eyebrow {
+  color: #0f766e;
+  grid-column: 1;
+}
+
+#pricing-calculator h2 {
+  margin-bottom: 8px;
+  font-family: coda, Arial, sans-serif;
+  font-size: clamp(1.85rem, 3vw, 2.6rem);
+  line-height: 1.12;
+  grid-column: 1;
+}
+
+.pc-subtitle,
+.pc-questions-sub,
+.pc-helper {
+  color: #475569;
+  line-height: 1.6;
+}
+
+.pc-subtitle {
+  grid-column: 1;
+}
+
+.pc-questions {
+  margin-bottom: 24px;
+}
+
+.pc-questions-title {
+  margin-bottom: 6px;
+  font-family: krona-one, Arial, sans-serif;
+  font-size: 0.92rem;
+  color: #172554;
+}
+
+.pc-qq-btn,
+.qq-next,
+#btn-reset,
+#enq-submit,
+.btn-cta,
+#whatsapp-chat a {
+  min-height: 44px;
+  border-radius: 8px !important;
+  text-decoration: none !important;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.pc-qq-btn,
+.qq-next,
+.btn-cta,
+#enq-submit {
+  background: linear-gradient(135deg, #1d4ed8, #0f766e) !important;
+  color: #ffffff !important;
+  border: 0 !important;
+  box-shadow: 0 14px 28px rgba(29, 78, 216, 0.24);
+}
+
+.pc-qq-btn:hover,
+.qq-next:hover,
+.btn-cta:hover,
+#enq-submit:hover,
+#whatsapp-chat a:hover {
+  transform: translateY(-1px);
+}
+
+.pc-qq-btn::before {
+  content: "Start";
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.svc-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.svc-item {
+  position: relative;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.svc-item input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.svc-card {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 18px;
+  border: 1px solid #dbe4f0;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.svc-card:hover {
+  transform: translateY(-2px);
+  border-color: #93c5fd;
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.12);
+}
+
+.svc-item input[type="checkbox"]:checked + .svc-card {
+  border-color: #0f766e;
+  background: linear-gradient(180deg, #f0fdfa, #ffffff 48%);
+  box-shadow: 0 18px 42px rgba(15, 118, 110, 0.18);
+}
+
+.svc-item input[type="checkbox"]:focus-visible + .svc-card {
+  outline: 3px solid rgba(45, 212, 191, 0.44);
+  outline-offset: 3px;
+}
+
+.svc-top,
+.svc-bottom {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.svc-name {
+  color: #0f172a;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.svc-tag {
+  flex: 0 0 auto;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #1e3a8a;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.svc-tag-popular {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.svc-desc {
+  flex: 1 1 auto;
+  color: #64748b;
+  line-height: 1.48;
+}
+
+.svc-price {
+  color: #172554;
+  font-size: 1.45rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.svc-meta {
+  color: #64748b;
+  font-size: 0.78rem;
+  text-align: right;
+}
+
+.billing-switch {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 18px;
+  padding: 5px;
+  border-radius: 999px;
+  background: #f1f5f9;
+}
+
+.billing-btn {
+  min-height: 36px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #334155;
+}
+
+.billing-active {
+  background: #ffffff !important;
+  color: #0f766e;
+  border-color: #ccfbf1;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+}
+
+#recommendation-box {
+  border-radius: 8px !important;
+  background: linear-gradient(135deg, #ecfeff, #f8fafc) !important;
+}
+
+.total-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 24px;
+  padding: 18px;
+  border-radius: 8px;
+  background: #0f172a;
+  color: #ffffff;
+}
+
+.total-label {
+  margin-bottom: 6px;
+  color: #cbd5e1;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+}
+
+.total-amount-wrapper {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+
+#total-amount {
+  color: #ffffff;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1;
+}
+
+.total-meta {
+  color: #99f6e4;
+  font-weight: 700;
+}
+
+.total-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+#btn-reset {
+  padding: 10px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.pc-helper {
+  margin-top: 14px;
+  font-size: 0.9rem;
+}
+
+.camira-trust {
+  border-radius: 8px;
+  display: none;
+}
+
+.camira-trust.is-visible {
+  display: block;
+}
+
+#enquiry-section > div {
+  padding: clamp(20px, 3vw, 30px) !important;
+}
+
+#enquiry-section h2 {
+  color: #0f172a;
+  font-size: 1.8rem;
+  line-height: 1.2;
+}
+
+#enquiry-form input,
+#enquiry-form textarea {
+  min-height: 44px;
+  border-color: #cbd5e1 !important;
+  border-radius: 8px !important;
+  color: #0f172a;
+}
+
+#enquiry-form textarea {
+  min-height: 116px;
+}
+
+#whatsapp-chat a {
+  border: 1px solid rgba(255, 255, 255, 0.66);
+}
+
+.site-footer {
+  margin: 30px auto 0;
+  padding: 20px 16px 8px;
+  color: rgba(255, 255, 255, 0.78);
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+@media (max-width: 820px) {
+  main {
+    width: min(100% - 24px, 1020px);
+  }
+
+  .pc-header {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .pc-header::after {
+    width: fit-content;
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .svc-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .total-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .total-actions,
+  .total-actions .btn-cta,
+  #btn-reset {
+    width: 100%;
+  }
+
+  .total-actions .btn-cta,
+  #btn-reset {
+    text-align: center;
+  }
+
+  #enquiry-form > div:first-child {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 560px) {
+  main {
+    width: min(100% - 18px, 1020px);
+    padding-bottom: 48px;
+  }
+
+  .hero {
+    padding-top: 52px;
+  }
+
+  .svc-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .billing-switch {
+    justify-content: stretch;
+    border-radius: 8px;
+  }
+
+  .billing-btn {
+    flex: 1 1 0;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .qq-inner {
+    width: min(94vw, 640px);
+  }
+
+  #u2163-bw,
+  #u2163,
+  #u2163_align_to_page {
+    width: 100% !important;
+    max-width: 100vw !important;
+    left: 0 !important;
+    min-height: 58px !important;
+    transform: none !important;
+    overflow: hidden !important;
+  }
+
+  #menuu2033 {
+    width: 100% !important;
+    max-width: 100vw !important;
+    left: 0 !important;
+    margin: 0 !important;
+    padding: 10px 8px !important;
+    display: flex !important;
+    gap: 4px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    position: static !important;
+    height: auto !important;
+  }
+
+  #menuu2033::-webkit-scrollbar {
+    display: none;
+  }
+
+  #menuu2033 .MenuItemContainer {
+    position: static !important;
+    width: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    flex: 0 0 auto;
+  }
+
+  #menuu2033 a.MenuItem {
+    position: static !important;
+    width: auto !important;
+    min-height: 36px !important;
+    margin: 0 !important;
+    padding: 0 10px !important;
+    display: flex !important;
+    align-items: center;
+  }
+
+  #menuu2033 .MenuItemLabel {
+    position: static !important;
+    width: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    top: auto !important;
+    white-space: nowrap;
+  }
+}
 
 
 
@@ -674,8 +1198,6 @@ main {
 
 </head>
 <body>
-  <canvas id="heroCanvas" aria-hidden="true"></canvas>
-
   <div id="page" class="clearfix">
     <!-- Top nav (keeps your existing structure & IDs so styles match) -->
     <div id="u2163-bw" class="browser_width colelem"><div id="u2163">
@@ -735,7 +1257,7 @@ main {
     <main>
       <section class="hero">
         <h1>Pricing</h1><br>
-        <p>Transparent fees for accounting & advisory services — build a package and get an instant estimate.</p>
+        <p>Transparent pricing for accounting and advisory services. Build a package and get an instant estimate.</p>
       </section>
 
       <!-- Calculator: questionnaire + interactive services selector -->
@@ -744,8 +1266,8 @@ main {
           <p class="pc-eyebrow">Interactive quote</p>
           <h2>Build your package</h2>
           <p class="pc-subtitle">
-            Start with a few quick questions, then review the services we’ve selected for you.
-            Click <strong>"Get Started"</strong> to email your selection.
+            Start with a few quick questions, then review the services we have selected for you.
+            Click <strong>"Send via WhatsApp"</strong> to share your selection instantly.
           </p>
         </div>
 
@@ -759,12 +1281,12 @@ main {
   <h3 class="pc-questions-title">Quick questionnaire</h3>
   <p class="pc-questions-sub">
     Click the button below and answer a few quick questions.
-    We’ll pre-select a suggested package for you.
+    We will pre-select a suggested package for you.
   </p>
 
   <!-- Button to open wizard -->
   <button type="button" class="pc-qq-btn" id="start-qq">
-    ⚡ Start quick questionnaire
+    Start quick questionnaire
   </button>
 
   <!-- Keep the original questions hidden for the existing JS logic -->
@@ -1017,7 +1539,7 @@ main {
             </label>
           </div>
 
-          <div style="display:flex;justify-content:flex-end;gap:12px;margin-top:1rem;">
+          <div class="billing-switch">
   <button type="button" id="billing-monthly" class="billing-btn billing-active">Monthly</button>
   <button type="button" id="billing-annual" class="billing-btn">Annual <span style="opacity:.7">(save 10%)</span></button>
 </div>
@@ -1053,39 +1575,37 @@ main {
             <div class="total-actions">
               <button type="button" id="btn-reset">Reset</button>
 
-              <a id="whatsapp-btn" class="btn-cta" href="#" target="_blank">Get Started</a>
+              <a id="whatsapp-btn" class="btn-cta" href="#" target="_blank" rel="noopener noreferrer">Send via WhatsApp</a>
 
             </div>
+          </div>
 
-              <div class="camira-trust">
-  <div class="trust-inner">
-    <div class="trust-image">
-      <img src="images/trust-accounting.jpg" alt="Camira Accounting Team">
-    </div>
+          <div class="camira-trust">
+            <div class="trust-inner">
+              <div class="trust-image">
+                <img src="images/trust-accounting.jpg" alt="Camira Accounting Team">
+              </div>
 
-    <div class="trust-content">
-      <blockquote>
-        “Camira helped us get our finances under control and saved us thousands in unnecessary tax. 
-        We finally know where our business stands every month.”
-      </blockquote>
-      <p class="trust-author">— Small Business Owner, Gauteng</p>
+              <div class="trust-content">
+                <blockquote>
+                  "Camira helped us get our finances under control and saved us thousands in unnecessary tax.
+                  We finally know where our business stands every month."
+                </blockquote>
+                <p class="trust-author">- Small Business Owner, Gauteng</p>
 
-      <div class="trust-badges">
-        <div class="badge">✓ SARS Compliant</div>
-        <div class="badge">✓ Transparent Pricing</div>
-        
-        <div class="badge">✓ Dedicated Account Manager</div>
-        <div class="badge">✓ Trusted by SA Businesses</div>
-      </div>
-    </div>
-  </div>
-</div>
-
+                <div class="trust-badges">
+                  <div class="badge">SARS Compliant</div>
+                  <div class="badge">Transparent Pricing</div>
+                  <div class="badge">Dedicated Account Manager</div>
+                  <div class="badge">Trusted by SA Businesses</div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <p id="calc-total-desc" class="pc-helper">
-            Selected services will be added to your request email when you click
-            <strong>"Get Started"</strong>.
+            Selected services will be added to your WhatsApp draft when you click
+            <strong>"Send via WhatsApp"</strong>.
           </p>
         </form>
       </section>
@@ -1128,7 +1648,7 @@ main {
       </section>
 
       <div id="whatsapp-chat" style="margin:28px auto; text-align:center">
-        <a href="https://wa.me/27846022397" target="_blank"
+        <a href="https://wa.me/27846022397" target="_blank" rel="noopener noreferrer"
           style="
             display:inline-flex;
             align-items:center;
@@ -1148,6 +1668,8 @@ main {
           <span>Chat with us</span>
         </a>
       </div>
+
+      <footer class="site-footer">powered by Teodor dev tech</footer>
     </main>
 
     <!-- Footer: copy your existing footer here if desired -->
@@ -1315,286 +1837,6 @@ let currentIndex   = 0;
 </script>
 
 <script>
-  (function () {
-    /* Modern, self-contained rewrite of the site's inline animation.
-       Behaviour matched to original:
-         - particles spawn near mouse/touch (multiple per event)
-         - particles have velocity, decay in radius, then are recycled
-         - lines are drawn between nearby particles
-         - responsive, DPR-aware, optimized pooling and debounced resize
-       Config below tweaks look/behaviour; adjust to taste.
-    */
-
-    const canvas = document.getElementById('heroCanvas');
-    const ctx = canvas.getContext('2d');
-
-    // Visual & behaviour configuration
-    const C = {
-      bg: '#071033',
-      dotColor: '#ffffff',
-      lineColor: '#ffffff',
-      baseRadius: 3.5,        // initial radius of spawned particles
-      maxParticles: 300,      // cap
-      spawnPerTouchMin: 1,    // min particles spawned on pointer move
-      spawnPerTouchMax: 4,    // max particles spawned on pointer move
-      spawnSpread: 10,        // px spread around pointer
-      friction: 0.99,         // velocity damping per frame
-      radiusDecay: 0.985,      // per-frame radius multiplier
-      minRadius: 0.5,         // particle dies below this radius
-      maxLinkDistance: 110,   // distance to draw connecting line
-      lineAlpha: 0.16,        // line global alpha
-      dotAlpha: 1.0,          // particle fill alpha
-      jitter: 0.05,         // random jitter added to velocity
-      maxVel: 0.9,            // clamp on velocity
-      dprClamp: 3             // limit DPR scaling to avoid huge canvases
-    };
-
-    // State
-    let width = 0, height = 0, DPR = 1;
-    let last = performance.now();
-    let running = true;
-    let particles = [];   // active particles
-    let pool = [];        // recycled particles
-
-    // pointer state (supports multi-touch array)
-    const pointers = []; // array of {x,y,active}
-
-    // Basic helpers
-    const rand = (a,b) => Math.random() * (b - a) + a;
-    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
-
-    // Particle ctor / factory using pooling
-    function Particle() {
-      this.alive = false;
-      this.x = 0; this.y = 0;
-      this.vx = 0; this.vy = 0;
-      this.r = 0;
-      this.color = C.dotColor;
-    }
-    Particle.prototype.init = function (x,y,force) {
-      this.x = x;
-      this.y = y;
-      // give an initial random velocity biased by force
-      const ang = Math.random() * Math.PI * 2;
-      const speed = rand(0.2, 1.6) * (force || 1);
-      this.vx = Math.cos(ang) * speed + rand(-0.6, 0.6);
-      this.vy = Math.sin(ang) * speed + rand(-0.6, 0.6) - 0.3;
-      this.r = C.baseRadius * rand(0.7, 1.25);
-      this.alive = true;
-    };
-    Particle.prototype.move = function () {
-      // jitter to keep things varied
-      this.vx += rand(-C.jitter, C.jitter);
-      this.vy += rand(-C.jitter, C.jitter);
-
-      // apply friction and clamp
-      this.vx *= C.friction;
-      this.vy *= C.friction;
-      this.vx = clamp(this.vx, -C.maxVel, C.maxVel);
-      this.vy = clamp(this.vy, -C.maxVel, C.maxVel);
-
-      this.x += this.vx;
-      this.y += this.vy - 0.25;   // gentle upward drift
-
-
-      // radius decay
-      this.r *= C.radiusDecay;
-      if (this.r <= C.minRadius) this.alive = false;
-    };
-    Particle.prototype.draw = function (ctx) {
-  if (!this.alive) return;
-
-  const radius = Math.max(1, this.r * 1.8);
-
-  const gradient = ctx.createRadialGradient(
-    this.x, this.y, 0,
-    this.x, this.y, radius
-  );
-
-  gradient.addColorStop(0, "rgba(255,255,255,0.9)");
-  gradient.addColorStop(0.4, "rgba(255,255,255,0.35)");
-  gradient.addColorStop(1, "rgba(255,255,255,0)");
-
-  ctx.beginPath();
-  ctx.arc(this.x, this.y, radius, 0, Math.PI * 2);
-  ctx.fillStyle = gradient;
-  ctx.fill();
-};
-
-
-    // Spawn (use pool if available)
-    function spawnAt(x,y,force) {
-      let p = pool.length ? pool.pop() : new Particle();
-      p.init(x + rand(-C.spawnSpread, C.spawnSpread), y + rand(-C.spawnSpread, C.spawnSpread), force);
-      particles.push(p);
-    }
-
-    // Create multiple spawns around pointer (this matches original behaviour)
-    function spawnBurst(x,y) {
-      const count = Math.round(rand(C.spawnPerTouchMin, C.spawnPerTouchMax));
-      for (let i = 0; i < count; i++) {
-        if ((particles.length + pool.length) >= C.maxParticles) break;
-        spawnAt(x, y, rand(0.6, 1.4));
-      }
-    }
-
-    // Resize canvas (DPR-aware, debounced)
-    let resizeTimer = 0;
-    function resize() {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        DPR = Math.min(C.dprClamp, Math.max(1, window.devicePixelRatio || 1));
-        width = Math.max(320, window.innerWidth);
-        height = Math.max(200, window.innerHeight);
-        canvas.style.width = width + 'px';
-        canvas.style.height = height + 'px';
-        canvas.width = Math.floor(width * DPR);
-        canvas.height = Math.floor(height * DPR);
-        ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-        // keep background filled
-        ctx.fillStyle = C.bg;
-        ctx.fillRect(0,0,width,height);
-      }, 80);
-    }
-
-    // Pointer handling (mouse + touch)
-    function onPointerMove(e) {
-      // support mouse and touch events
-      let x, y;
-      if (e.touches && e.touches.length) {
-        // spawn for each touch point
-        for (let i = 0; i < e.touches.length; i++) {
-          const t = e.touches[i];
-          const rect = canvas.getBoundingClientRect();
-          x = t.clientX - rect.left;
-          y = t.clientY - rect.top;
-          spawnBurst(x, y);
-        }
-      } else {
-        const rect = canvas.getBoundingClientRect();
-        x = e.clientX - rect.left;
-        y = e.clientY - rect.top;
-        spawnBurst(x, y);
-      }
-    }
-
-    function onPointerDown(e) { onPointerMove(e); }
-    function onPointerUp() {} // no-op
-
-    // Main update loop (moves particles, reclaims dead ones)
-    function update(dt) {
-      for (let i = particles.length - 1; i >= 0; i--) {
-        const p = particles[i];
-        if (!p) continue;
-        p.move();
-        // recycle off-screen or dead
-        if (!p.alive || p.x < -30 || p.x > width + 30 || p.y < -30 || p.y > height + 30) {
-          pool.push(particles.splice(i, 1)[0]);
-        }
-      }
-    }
-
-    // Draw particles and connecting lines
-    function draw() {
-      // background
-      ctx.fillStyle = C.bg;
-      ctx.fillRect(0, 0, width, height);
-
-     
-
-      // draw particles on top
-      ctx.globalAlpha = C.dotAlpha;
-      for (let i = 0; i < particles.length; i++) {
-        particles[i].draw(ctx);
-      }
-    }
-
-    // Animation frame
-let raf = null;
-function loop(now) {
-  const dt = Math.min(50, now - last) / 16.6667;
-  last = now;
-
-  // Add slow ambient bubbles
-  if (particles.length < C.maxParticles * 0.5 && Math.random() < 0.04) {
-    spawnAt(rand(0, width), height + 20, 0.4);
-  }
-
-  update(dt);
-  draw();
-  raf = requestAnimationFrame(loop);
-}
-
-
-    // Init
-    function init() {
-      resize();
-      // initial ambient particles (like original had a soft background)
-      const initialCount = Math.round( (window.innerWidth * window.innerHeight) / 160000 * 12 );
-      for (let i = 0; i < initialCount; i++) {
-        const px = rand(0, width), py = rand(0, height);
-        spawnAt(px, py, rand(0.2, 0.9));
-      }
-
-      // event listeners
-      window.addEventListener('resize', resize, { passive: true });
-      window.addEventListener('mousemove', onPointerMove, { passive: true });
-      window.addEventListener('mousedown', onPointerDown, { passive: true });
-      window.addEventListener('touchstart', onPointerMove, { passive: true });
-      window.addEventListener('touchmove', onPointerMove, { passive: true });
-      window.addEventListener('touchend', onPointerUp, { passive: true });
-
-      last = performance.now();
-      raf = requestAnimationFrame(loop);
-    }
-
-    // Clean-up helper (if you want to remove later)
-    function destroy() {
-      cancelAnimationFrame(raf);
-      window.removeEventListener('resize', resize);
-      window.removeEventListener('mousemove', onPointerMove);
-      window.removeEventListener('mousedown', onPointerDown);
-      window.removeEventListener('touchstart', onPointerMove);
-      window.removeEventListener('touchmove', onPointerMove);
-      window.removeEventListener('touchend', onPointerUp);
-    }
-
-    // Start
-    init();
-
-    // expose small API to tweak live if you want
-    window.CamiraHeroBG = {
-      spawnAt,
-      setConfig: (obj) => { Object.assign(C, obj); },
-      destroy
-    };
-  })();
-  </script>
-
-<script>
-
-
-
-  let msg = `Hi Camira, I'm ${name}.%0A%0A`;
-  msg += `I'd like a quote for:%0A`;
-
-  if (sel.selected.length) {
-    sel.selected.forEach(s => {
-      msg += `• ${s}%0A`;
-    });
-  } else {
-    msg += `• Accounting services%0A`;
-  }
-
-  msg += `%0AEstimated total: ${formatCurrency(sel.total)} `;
-  msg += billing === "monthly" ? "per month" : "per year (10% discount)";
-  msg += `%0A%0AThank you.`;
-
-  whatsappBtn.href = `https://wa.me/27846022397?text=${msg}`;
-
-</script>
-
-<script>
 (function(){
 
   const form = document.getElementById("svc-form");
@@ -1682,9 +1924,9 @@ function loop(now) {
 
   function updateWhatsApp(){
     const {items,total} = getSelection();
-    const name = nameInput.value || "—";
+    const name = nameInput.value || "-";
     let msg = `Hi Camira, I'm ${name}.\n\nI'd like a quote for:\n`;
-    items.length ? items.forEach(i=>msg+=`• ${i}\n`) : msg+="• Accounting services\n";
+    items.length ? items.forEach(i=>msg+=`- ${i}\n`) : msg+="- Accounting services\n";
     msg += `\nEstimated total: ${money(total)} ${billing==="monthly"?"per month":"per year (10% off)"}`;
     whatsappBtn.href="https://wa.me/27846022397?text="+encodeURIComponent(msg);
   }
@@ -1744,5 +1986,49 @@ function loop(now) {
 
  
 
+
+<script>
+(function () {
+  const enquiryForm = document.getElementById("enquiry-form");
+  const feedback = document.getElementById("enq-feedback");
+  if (!enquiryForm || !feedback) return;
+
+  enquiryForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    if (!enquiryForm.reportValidity()) return;
+
+    const data = new FormData(enquiryForm);
+    const selected = Array.from(document.querySelectorAll('#svc-form input[name="service"]:checked'))
+      .map((el) => el.value);
+    const total = (document.getElementById("total-amount") || {}).textContent || "R0";
+    const billing = (document.getElementById("billing-label") || {}).textContent || "per month";
+
+    const bodyLines = [
+      "Name: " + (data.get("name") || ""),
+      "Email: " + (data.get("email") || ""),
+      "Phone: " + (data.get("phone") || ""),
+      "Company: " + (data.get("company") || ""),
+      "",
+      "Selected services:",
+      selected.length ? selected.map((s) => "- " + s).join("\n") : "- Accounting services",
+      "",
+      "Estimated total: " + total + " " + billing,
+      "",
+      "Message:",
+      (data.get("message") || "").toString()
+    ];
+
+    const subject = encodeURIComponent("Pricing enquiry - Camira website");
+    const body = encodeURIComponent(bodyLines.join("\n"));
+    window.location.href = "mailto:Info1@camira.co.za?subject=" + subject + "&body=" + body;
+
+    feedback.style.display = "block";
+    feedback.textContent = "Your email client has been opened with your enquiry details.";
+  });
+})();
+</script>
 </body>
 </html>
+
+

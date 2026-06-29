@@ -70,6 +70,194 @@ body {
     #u4001{ width:92px; background-color:transparent; border-radius:10px; padding-bottom:17px; position:relative; }
     #u4002-4{ width:92px; min-height:17px; text-align:center; color:#FFFFFF; font-family:krona-one, sans-serif; position:relative; margin-right:-10000px; top:8px; }
     #u4001.MuseMenuActive #u4002-4 p{ font-family: Helvetica, Helvetica Neue, Arial, sans-serif; }
+
+    /* Articles refresh */
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      min-width: 0;
+      overflow-x: hidden;
+    }
+
+    body {
+      padding-top: 78px;
+      background: #071033;
+      color: #0f172a;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(7, 16, 51, 0.1), rgba(7, 16, 51, 0.92)),
+        radial-gradient(circle at 18% 16%, rgba(96, 165, 250, 0.22), transparent 34%),
+        radial-gradient(circle at 84% 10%, rgba(45, 212, 191, 0.14), transparent 32%);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.18;
+      background-image: radial-gradient(rgba(255,255,255,0.9) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    #page {
+      width: min(1020px, 100%);
+      min-height: 0;
+      position: relative;
+      z-index: 1;
+      margin: 0 auto;
+    }
+
+    #u2163-bw,
+    #u2163,
+    #u2163_align_to_page,
+    #menuu2033 {
+      background: rgba(51, 47, 47, 0.96) !important;
+    }
+
+    main {
+      width: min(920px, calc(100vw - 32px));
+      max-width: none;
+      margin: 38px auto 0 !important;
+      padding: clamp(22px, 4vw, 44px);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.97);
+      box-shadow: 0 26px 70px rgba(2, 6, 23, 0.34);
+    }
+
+    main > div:first-child {
+      color: #0f766e !important;
+      font-family: krona-one, Arial, sans-serif;
+      font-size: 0.82rem !important;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    main > div:nth-of-type(2) {
+      max-width: 760px;
+      margin: 0 auto !important;
+      color: #0f172a !important;
+      font-family: coda, Arial, sans-serif;
+      font-size: clamp(2rem, 5vw, 3.4rem) !important;
+      line-height: 1.12;
+    }
+
+    main img {
+      border-radius: 8px;
+      box-shadow: 0 18px 42px rgba(15, 23, 42, 0.16);
+    }
+
+    main p {
+      max-width: 760px !important;
+      color: #334155;
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+    main p[style*="justify"] {
+      text-align: left !important;
+    }
+
+    main section {
+      max-width: 860px !important;
+      margin: 48px auto !important;
+      padding: 0 !important;
+      overflow-x: auto;
+    }
+
+    main table {
+      min-width: 680px;
+      border-collapse: separate !important;
+      border-spacing: 0;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    main th {
+      background: #0f172a !important;
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    main th,
+    main td {
+      border-color: #dbe4f0 !important;
+      padding: 12px !important;
+      line-height: 1.45;
+    }
+
+    .site-footer {
+      width: min(920px, calc(100vw - 32px));
+      margin: 28px auto 0;
+      padding: 20px 16px 44px;
+      color: rgba(255, 255, 255, 0.78);
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding-top: 64px;
+      }
+
+      main {
+        width: min(100vw - 18px, 920px);
+        padding: 22px 18px;
+      }
+
+      #u2163-bw,
+      #u2163,
+      #u2163_align_to_page {
+        width: 100% !important;
+        left: 0 !important;
+        transform: none !important;
+      }
+
+      #menuu2033 {
+        width: 100% !important;
+        left: 0 !important;
+        margin: 0 !important;
+        padding: 10px 8px !important;
+        display: flex !important;
+        gap: 4px;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+
+      #menuu2033::-webkit-scrollbar {
+        display: none;
+      }
+
+      #menuu2033 .MenuItemContainer,
+      #menuu2033 a.MenuItem,
+      #menuu2033 .MenuItemLabel {
+        position: static !important;
+        width: auto !important;
+        min-height: 0 !important;
+        margin: 0 !important;
+        top: auto !important;
+      }
+
+      #menuu2033 a.MenuItem {
+        min-height: 36px !important;
+        padding: 0 10px !important;
+        display: flex !important;
+        align-items: center;
+      }
+    }
   </style>
 </head>
 <body>
@@ -115,7 +303,7 @@ body {
 
           <!-- Pricing (active) -->
           <div class="MenuItemContainer clearfix grpelem" id="u4000">
-            <a class="nonblock nontext MenuItem MenuItemWithSubMenu anim_swing rounded-corners clearfix colelem MuseMenuActive" id="u4001" href="pricing.html">
+            <a class="nonblock nontext MenuItem MenuItemWithSubMenu anim_swing rounded-corners clearfix colelem MuseMenuActive" id="u4001" href="Pricing.html">
               <div class="MenuItemLabel NoWrap rounded-corners clearfix grpelem" id="u4002-4"><p>Pricing</p></div>
             </a>
           </div>
@@ -255,6 +443,8 @@ body {
     <p style="text-align: center">E-pos: Info1@camira.co.za</p>
     <p style="text-align: center">Website: www.camira.co.za</p>
     </main>
+
+    <footer class="site-footer">powered by Teodor dev tech</footer>
 
 
    
